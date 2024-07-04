@@ -1,28 +1,48 @@
 import fs from 'node:fs/promises';
 
-export class CartManager {
-    constructor(path){
-        this.path = path
-        this.carts = []
+class CartManager {
+  constructor(path) {
+    this.path = path;
+    this.carts = [];
+  }
+
+  async getCarts() {
+    const list = await fs.readFile(this.path, 'utf-8');
+    this.carts = JSON.parse(list).data;
+    return this.carts;
+  }
+
+  async getCartById(id) {
+    await this.getCarts();
+    return this.carts.find(cart => cart.id === id);
+  }
+
+  async createCart() {
+    await this.getCarts();
+    const newCart = {
+      id: this.carts.length ? this.carts[this.carts.length - 1].id + 1 : 1,
+      products: [],
+    };
+    this.carts.push(newCart);
+    await fs.writeFile(this.path, JSON.stringify({ data: this.carts }));
+    return newCart;
+  }
+
+  async addProductToCart(cid, pid) {
+    await this.getCarts();
+    const cartIndex = this.carts.findIndex(cart => cart.id === parseInt(cid));
+    if (cartIndex === -1) return null;
+
+    const productIndex = this.carts[cartIndex].products.findIndex(product => product.id === parseInt(pid));
+    if (productIndex === -1) {
+      this.carts[cartIndex].products.push({ id: parseInt(pid), quantity: 1 });
+    } else {
+      this.carts[cartIndex].products[productIndex].quantity += 1;
     }
 
-
-    async addProductToCard(id, productId){
-        this.carts = await this.getCarts();
-        const cardsUpdated = this.carts.map((cart)=>{
-            if(cart.id !== id) return cart
-            
-            const indexProd = cart.products.findIndex(prod => prod.id === productId);
-            if(indexProd === -1){
-                cart.products.push({ id: productId, quantity: 1 })
-                return cart;
-            }
-            cart.products[indexProd] = { ...cart.products[indexProd], quantity: cart.products[indexProd].quantity + 1 }
-            return cart;
-            
-        })
-        this.carts = [...cardsUpdated]
-        await fs.writeFile(this.path,JSON.stringify({ data: this.carts }))
-    }
-
+    await fs.writeFile(this.path, JSON.stringify({ data: this.carts }));
+    return this.carts[cartIndex];
+  }
 }
+
+export default CartManager;
