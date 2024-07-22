@@ -1,0 +1,85 @@
+body {
+    margin: 40px;
+    background-color: #3d6feb7d;
+    color: #333333b1;
+}
+
+h1,
+h2 {
+    color: #444;
+}
+
+a {
+
+    margin-bottom: 20px;
+    text-decoration: none;
+    color: #f61a1a;
+    font-weight: bold;
+}
+
+a:hover {
+    text-decoration: underline;
+    text-shadow: 2px 2px 5px red;
+    color: black;
+    font-size: 1.2em; 
+}
+
+#product-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 50px;
+}
+
+.product {
+    background-color: #ffffffa9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 15px;
+    width: calc(33% - 40px);
+    box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2), 0 4px 8px rgba(0, 0, 255, 0.1); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px); 
+    box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2), 0 8px 16px rgba(0, 0, 255, 0.1);
+}
+.product div {
+    margin-bottom: 10px;
+}
+
+.product-id,
+.product-name,
+.product-price,
+.product-category,
+.product-description,
+.product-stock,
+.product-code {
+    font-size: 14px;
+    color: #5044ed;
+}
+
+.product-name {
+    font-weight: bold;
+    font-size: 16px;
+    color: #171616;
+}
+
+.product-category,
+.product-description,
+.product-stock,
+.product-code {
+    color: #777;
+}
+
+form {
+    margin-bottom: 50px;
+}
+
+form input,
+form button {
+    display: block;
+    margin-bottom: 10px;
+    padding: 8px;
+    font-size: 14px;
+}

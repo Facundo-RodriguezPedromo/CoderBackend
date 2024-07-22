@@ -1,51 +1,46 @@
-import fs from 'node:fs/promises';
+import fs from "fs/promises";
 
-class ProductManager {
+export default class ProductManager {
   constructor(path) {
     this.path = path;
-    this.productList = [];
   }
 
   async getProductList() {
-    const list = await fs.readFile(this.path, 'utf-8');
-    this.productList = JSON.parse(list).data;
-    return this.productList;
-  }
-
-  async getProductById(id) {
-    await this.getProductList();
-    return this.productList.find(product => product.id === id);
+    try {
+      const data = await fs.readFile(this.path, "utf8");
+      return JSON.parse(data);
+    } catch (error) {
+      console.error("Error:", error);
+      return [];
+    }
   }
 
   async addProduct(product) {
-    await this.getProductList();
-    const newProduct = {
-      ...product,
-      id: this.productList.length ? this.productList[this.productList.length - 1].id + 1 : 1,
-      status: product.status ?? true,
-    };
-    this.productList.push(newProduct);
-    await fs.writeFile(this.path, JSON.stringify({ data: this.productList }));
-    return newProduct;
-  }
-
-  async updateProduct(id, updatedProduct) {
-    await this.getProductList();
-    const index = this.productList.findIndex(product => product.id === id);
-    if (index === -1) return null;
-    this.productList[index] = { ...this.productList[index], ...updatedProduct, id };
-    await fs.writeFile(this.path, JSON.stringify({ data: this.productList }));
-    return this.productList[index];
+    const products = await this.getProductList();
+    product.id = products.length ? products[products.length - 1].id + 1 : 1;
+    products.push(product);
+    await fs.writeFile(this.path, JSON.stringify(products, null, 2));
   }
 
   async deleteProduct(id) {
-    await this.getProductList();
-    const index = this.productList.findIndex(product => product.id === id);
+    let products = await this.getProductList();
+    products = products.filter((product) => product.id !== parseInt(id, 10));
+    await fs.writeFile(this.path, JSON.stringify(products, null, 2));
+  }
+
+  async updateProduct(id, updatedProduct) {
+    let products = await this.getProductList();
+    const index = products.findIndex(
+      (product) => product.id === parseInt(id, 10)
+    );
     if (index === -1) return null;
-    const deletedProduct = this.productList.splice(index, 1);
-    await fs.writeFile(this.path, JSON.stringify({ data: this.productList }));
-    return deletedProduct[0];
+    products[index] = { ...products[index], ...updatedProduct };
+    await fs.writeFile(this.path, JSON.stringify(products, null, 2));
+    return products[index];
+  }
+
+  async getProductById(id) {
+    const products = await this.getProductList();
+    return products.find((product) => product.id === parseInt(id, 10));
   }
 }
-
-export default ProductManager;

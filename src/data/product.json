@@ -1,1 +1,47 @@
-{"data":[{"title":"arroz"},{"title":"arrozes"},{"title":"arrozes"},{"title":"arrozes"},{"title":"arrozes"},{"title":"6to PRODUCTO"},{"title":"Lancha","description":"flota","code":"p1","price":10,"status":true,"stock":5,"category":"Vehiculos","thumbnails":["",""],"id":null}]}
+[
+  {
+    "name": "Patineta",
+    "price": 12,
+    "category": "Deportes",
+    "description": "Tabloide",
+    "stock": 4,
+    "code": "#134545566778",
+    "id": 1
+  },
+  {
+    "name": "Tractor",
+    "price": 657,
+    "category": "Campo",
+    "description": "Fuerza bruta",
+    "stock": 4,
+    "code": "#13654735678456878",
+    "id": 3
+  },
+  {
+    "name": "Nave",
+    "price": 546543,
+    "category": "Volatil",
+    "description": "Alturas buenas",
+    "stock": 1,
+    "code": "#13454465732458778",
+    "id": 5
+  },
+  {
+    "name": "Monopatin",
+    "price": 45,
+    "category": "skatepark",
+    "description": "despacio seguro",
+    "stock": 5,
+    "code": "#1349999932458778",
+    "id": 6
+  },
+  {
+    "name": "Barco",
+    "price": 7865,
+    "category": "Maritima",
+    "description": "Navegador como chrome",
+    "stock": 4,
+    "code": "#1345232323258778",
+    "id": 7
+  }
+]
