@@ -1,16 +1,26 @@
+/* styles.css */
+
+/* Estilos generales del cuerpo */
 body {
+    font-family: Arial, sans-serif;
+    background-color: #1443b97d; /* Color de fondo para la mayoría de las páginas */
     margin: 40px;
-    background-color: #3d6feb7d;
     color: #333333b1;
 }
 
-h1,
-h2 {
-    color: #444;
+/* Estilos para los encabezados */
+h1 {
+    color: #d80f0f;
+    margin-bottom: 20px;
 }
 
-a {
+h2 {
+    color: #444;
+    margin-bottom: 15px;
+}
 
+/* Estilos para los enlaces */
+a {
     margin-bottom: 20px;
     text-decoration: none;
     color: #f61a1a;
@@ -21,65 +31,72 @@ a:hover {
     text-decoration: underline;
     text-shadow: 2px 2px 5px red;
     color: black;
-    font-size: 1.2em; 
+    font-size: 1.2em;
 }
 
-#product-list {
+/* Estilos para el contenedor de productos en el carrito y en la página principal */
+#cart-list, #product-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 50px;
+    gap: 20px;
+    padding: 20px;
 }
 
-.product {
-    background-color: #ffffffa9;
+/* Estilos para cada tarjeta de producto */
+.cart-item, .product {
+    background-color: #ffffffa9; /* Fondo blanco con opacidad para las tarjetas */
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 15px;
-    width: calc(33% - 40px);
-    box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2), 0 4px 8px rgba(0, 0, 255, 0.1); 
+    box-shadow: 0 2px 4px rgba(0, 0, 255, 0.2), 0 4px 8px rgba(0, 0, 255, 0.1);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: calc(33% - 40px); /* Ajusta el tamaño para que encaje en la página */
 }
 
-.product:hover {
-    transform: translateY(-5px); 
+.cart-item:hover, .product:hover {
+    transform: translateY(-5px);
     box-shadow: 0 4px 8px rgba(0, 0, 255, 0.2), 0 8px 16px rgba(0, 0, 255, 0.1);
 }
-.product div {
+
+/* Estilos para los datos dentro de cada tarjeta de producto */
+.cart-item div, .product div {
     margin-bottom: 10px;
 }
 
-.product-id,
-.product-name,
-.product-price,
-.product-category,
-.product-description,
-.product-stock,
-.product-code {
+/*  TITULOS  */
+.cart-product-id, .cart-product-name, .cart-product-price, 
+.cart-product-category, .cart-product-description, .cart-product-stock, 
+.cart-product-code, .cart-product-quantity,
+.product-id, .product-name, .product-price, .product-category,
+.product-description, .product-stock, .product-code {
     font-size: 14px;
-    color: #5044ed;
+    line-height: 1.5;
 }
 
-.product-name {
+.cart-product-name, .product-name {
     font-weight: bold;
     font-size: 16px;
     color: #171616;
 }
 
-.product-category,
-.product-description,
-.product-stock,
-.product-code {
+.cart-product-category, .cart-product-description, .cart-product-stock, 
+.cart-product-code, .product-category, .product-description, 
+.product-stock, .product-code {
     color: #777;
 }
+
 
 form {
     margin-bottom: 50px;
 }
 
-form input,
-form button {
+form input, form button {
     display: block;
     margin-bottom: 10px;
     padding: 8px;
     font-size: 14px;
+}
+
+body:not([data-page="cart"]) #product-list {
+    gap: 50px; 
 }

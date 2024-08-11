@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Carrito</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Carrito del cliente</h1>
+    <hr>
+    <h2>Productos en el Carrito:</h2>
+    <div id="cart-list">
+        {{#each cart}}
+            <div class="cart-item">
+                <div class="cart-product-id">ID: {{this._id}}</div>
+                <div class="cart-product-name">Nombre: {{this.name}}</div>
+                <div class="cart-product-price">Precio: {{this.price}}</div>
+                <div class="cart-product-category">Categoría: {{this.category}}</div>
+                <div class="cart-product-description">Descripción: {{this.description}}</div>
+                <div class="cart-product-stock">Stock: {{this.stock}}</div>
+                <div class="cart-product-code">Código: {{this.code}}</div>
+                <div class="cart-product-quantity">Cantidad: {{this.quantity}}</div>
+                <div class="cart-product-CódigoID">CódigoID: {{this.quantity}}</div>
+            </div>
+        {{/each}}
+    </div>
+    <script src="/clientCart.js"></script>
+</body>
+</html> 

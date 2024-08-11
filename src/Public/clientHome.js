@@ -1,54 +1,41 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const socket = io();
-    const productList = document.getElementById('product-list');
+document.addEventListener("DOMContentLoaded", () => {
+  const socket = io();
+  const productList = document.getElementById("product-list");
+  const cartList = document.getElementById("cart-list");
 
-    // Pide la lista
-    socket.emit('requestProducts');
+  // Traemos  la lista desde el servidor
+  socket.emit("requestProducts");
 
-    // Res de lista de productos
-    socket.on('updateProducts', (products) => {
-        productList.innerHTML = '';
-        products.forEach(product => {
-            const productDiv = document.createElement('div');
-            productDiv.classList.add('product');
+  // Agregar al carro
+  document.addEventListener("click", (event) => {
+    if (event.target?.classList.contains("add-to-cart")) {
+      const productId = event.target.getAttribute("data-id");
+      console.log('Adding product to cart:', productId);
+      socket.emit("addProductToCart", { productId });
+    }
+  });
 
-            const productId = document.createElement('div');
-            productId.classList.add('product-id');
-            productId.textContent = `ID: ${product.id}`;
+  // Actualiza la lista del carrito
+  socket.on("updateCart", (cartItems) => {
+    cartList.innerHTML = cartItems.map(item =>
+      `<li>${item.name} - $${item.price} (Cantidad: ${item.quantity})</li>`
+    ).join("");
+  });
 
-            const productName = document.createElement('div');
-            productName.classList.add('product-name');
-            productName.textContent = `Nombre: ${product.name}`;
-
-            const productPrice = document.createElement('div');
-            productPrice.classList.add('product-price');
-            productPrice.textContent = `Precio: ${product.price}`;
-
-            const productCategory = document.createElement('div');
-            productCategory.classList.add('product-category');
-            productCategory.textContent = `Categoria: ${product.category}`;
-
-            const productDescription = document.createElement('div');
-            productDescription.classList.add('product-description');
-            productDescription.textContent = `Descripcion: ${product.description}`;
-
-            const productStock = document.createElement('div');
-            productStock.classList.add('product-stock');
-            productStock.textContent = `Stock: ${product.stock}`;
-
-            const productCode = document.createElement('div');
-            productCode.classList.add('product-code');
-            productCode.textContent = `Codigo: ${product.code}`;
-
-            productDiv.appendChild(productId);
-            productDiv.appendChild(productName);
-            productDiv.appendChild(productPrice);
-            productDiv.appendChild(productCategory);
-            productDiv.appendChild(productDescription);
-            productDiv.appendChild(productStock);
-            productDiv.appendChild(productCode);
-
-            productList.appendChild(productDiv);
-        });
-    });
+  // Actualiza la lista de productos
+  socket.on("updateProducts", (products) => {
+    productList.innerHTML = products.map(product =>
+      `<div class="product">
+        <div class="product-id">ID: ${product._id}</div>
+        <div class="product-name">Nombre: ${product.name}</div>
+        <div class="product-price">Precio: ${product.price}</div>
+        <div class="product-category">Categoría: ${product.category}</div>
+        <div class="product-description">Descripción: ${product.description}</div>
+        <div class="product-stock">Stock: ${product.stock}</div>
+        <div class="product-code">Código: ${product.code}</div>
+        
+        <button class="add-to-cart" data-id="${product._id}">Agregar al carrito</button>
+      </div>`
+    ).join("");
+  });
 });

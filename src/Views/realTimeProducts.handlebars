@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,12 @@
     <script src="/socket.io/socket.io.js"></script>
     <link rel="stylesheet" href="/styles.css">
 </head>
+
 <body>
     <h1>Administrar Productos</h1>
+    <hr>
     <div id="product-list">
-        <!-- productos en el instante de agregados-->
+        <!-- PRODUCTOS QUE SE AGREGAN EN EL MOMENTO -->
     </div>
 
     <h2>Agregar Producto</h2>
@@ -21,17 +24,15 @@
         <input type="text" id="product-description" placeholder="Descripción del producto" required>
         <input type="number" id="product-stock" placeholder="Stock del producto" required>
         <input type="text" id="product-code" placeholder="Código del producto" required>
-        <button type="submit">Agregar Producto </button>
+        <button type="submit">Agregar Producto</button>
     </form>
 
     <h2>Eliminar Producto</h2>
     <form id="delete-product-form">
-        <input type="number" id="delete-product-id" placeholder="ID del producto a eliminar" required>
+        <input type="text" id="delete-product-codeID" placeholder="Código a eliminar" required>
         <button type="submit">Eliminar Producto</button>
     </form>
-
-    <a href="/">Volver a home</a>
-
     <script src="/clientRealTimeProducts.js"></script>
 </body>
-</html>
+
+</html> 
