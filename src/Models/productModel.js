@@ -7,7 +7,7 @@ const productSchema = new Schema({
     description: String,
     stock: Number,
     code: Number,
-    codeID: { type: Number, unique: true }
+    
 });
 
 export const ProductModel = model('Product', productSchema);
