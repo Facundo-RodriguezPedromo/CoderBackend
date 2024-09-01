@@ -5,7 +5,7 @@ import path from 'path';
 import { fileURLToPath } from 'url';
 import { create } from 'express-handlebars';
 import mongoose from 'mongoose';
-import {ProductModel} from './Models/productModel.js'; // Asegúrate de importar ProductModel
+import {ProductModel} from './Models/productModel.js';
 import {CartModel} from './Models/cartModel.js';
 
 //import routesGeneral from './Routes/routesGeneral.js';
