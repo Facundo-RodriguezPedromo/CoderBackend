@@ -29,7 +29,7 @@ app.use(express.static(path.join(__dirname, 'Public')));
 // Configuración de Handlebars
 const hbs = create({
     extname: '.handlebars',
-    defaultLayout: 'main', // Asegúrate de que el nombre del layout coincida
+    defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'Views', 'layouts')
 });
 
