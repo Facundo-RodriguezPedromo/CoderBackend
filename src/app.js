@@ -141,7 +141,7 @@ io.on('connection', (socket) => {
     });
 });
 
-// Conexion a MongoDB
+// Conexion a MongoDB - falta crear.env
 mongoose.connect(
     'mongodb+srv://facundorodriguez7714:abuenoqueTEPASA123@cluster0.kog9u.mongodb.net/Entrega3?retryWrites=true&w=majority',
     { dbName: 'Entrega3' }
